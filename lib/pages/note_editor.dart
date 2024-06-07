@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, non_constant_identifier_names
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebasenotes/pages/home_page.dart';
@@ -45,7 +45,6 @@ class _NoteEditorScreenState extends State<NoteEditorScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // ignore: non_constant_identifier_names
     int color_id = widget.doc['color_id'];
     return Scaffold(
       backgroundColor: AppStyle.cardsColor[color_id],
