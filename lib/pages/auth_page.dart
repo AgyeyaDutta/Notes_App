@@ -1,31 +1,47 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebasenotes/pages/note_editor.dart';
+import 'package:firebasenotes/pages/home_page.dart';
 import 'package:firebasenotes/pages/note_reader.dart';
-import 'package:firebasenotes/pages/signup_page.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:firebasenotes/widgets/note_card.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class AuthScreen extends StatefulWidget {
+  const AuthScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<AuthScreen> createState() => _AuthScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _AuthScreenState extends State<AuthScreen> {
+  List<String>docIDs = [];
+
+  Future getDocId() async {
+    await FirebaseFirestore.instance.collection('Notes').get().then(
+      (snapshot) => snapshot.docs.forEach((element){
+        print(element.reference);
+      }) ,
+    );
+  }
+@override
+void initState(){
+  getDocId();
+  super.initState();
+}
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 1, 14, 25),
       appBar: AppBar(
-        title: const Text("FireNotes"),
-        titleTextStyle: const TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20,),
+        title: const Text("Fire Notes"),
+        titleTextStyle: const TextStyle(color: Colors.white,fontSize: 20, fontWeight:  FontWeight.bold),
         centerTitle: true,
-        backgroundColor: const Color.fromARGB(255, 1, 14, 25)
+        backgroundColor: const Color.fromARGB(255, 1, 14, 25),
       ),
+
+
+
       body:  Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,14 +85,21 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         ],
       ),
+      
+
+
+
+
+
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          FirebaseAuth.instance.signOut();
-          Get.to(()=> SignupPage());
-          //Navigator.push(context, MaterialPageRoute(builder: (context)=> const NoteEditoreScreen()));
-        },
-        label:const Text("Sign out"),
-        icon: const Icon(Icons.add)),
+          Navigator.push(context, MaterialPageRoute(builder: (context)=> const HomeScreen()));
+          }, label: const Text("Start new page"),
+          )
+      
+
+
+
     );
   }
 }
