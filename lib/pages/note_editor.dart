@@ -1,82 +1,103 @@
-import 'dart:math';
-//import 'dart:nativewrappers/_internal/vm/lib/core_patch.dart';
+// ignore_for_file: prefer_const_constructors
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebasenotes/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebasenotes/style/app_style.dart';
+import 'package:get/get.dart';
 
-class NoteEditoreScreen extends StatefulWidget {
-  const NoteEditoreScreen({super.key});
+// ignore: must_be_immutable
+class NoteEditorScreen extends StatefulWidget {
+  NoteEditorScreen(this.doc, {super.key, required this.userId});
+  QueryDocumentSnapshot doc;
+  final String userId;
 
   @override
-  State<NoteEditoreScreen> createState() => _NoteEditoreScreenState();
+  State<NoteEditorScreen> createState() => _NoteEditorScreenState();
 }
 
-class _NoteEditoreScreenState extends State<NoteEditoreScreen> {
-  int color_id = Random().nextInt(AppStyle.cardsColor.length);
+class _NoteEditorScreenState extends State<NoteEditorScreen> {
+  late TextEditingController _titleController;
+  late TextEditingController _contentController;
 
-  String date = DateTime.now().toString();
-  TextEditingController _titleController = TextEditingController();
-  TextEditingController _mainController = TextEditingController();
-  
+  @override
+  void initState() {
+    super.initState();
+    _titleController = TextEditingController(text: widget.doc["note_title"]);
+    _contentController = TextEditingController(text: widget.doc["note_content"]);
+  }
+
+  void _saveChanges() async {
+    await FirebaseFirestore.instance
+        .collection('Notes')
+        .doc(widget.doc.id)
+        .update({
+      'note_title': _titleController.text,
+      'note_content': _contentController.text,
+    });
+
+    // Optionally, show a success message
+    Get.snackbar('Success', 'Note updated successfully', snackPosition: SnackPosition.BOTTOM);
+
+    // Navigate back to the HomeScreen
+    Get.offAll(() => HomeScreen());
+  }
 
   @override
   Widget build(BuildContext context) {
+    // ignore: non_constant_identifier_names
+    int color_id = widget.doc['color_id'];
     return Scaffold(
       backgroundColor: AppStyle.cardsColor[color_id],
       appBar: AppBar(
+        title: const Text('Edit Note'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.save),
+            onPressed: _saveChanges,
+          ),
+        ],
+        titleTextStyle: const TextStyle(
+          color: Colors.black,
+          fontWeight: FontWeight.bold,
+          fontSize: 20,
+        ),
         backgroundColor: AppStyle.cardsColor[color_id],
         elevation: 0.0,
-        iconTheme: const IconThemeData(color: Colors.black),
-        title:const Text("Add a new Note",
-        style: TextStyle(color: Colors.black),),
       ),
-      body:  Padding(
-        padding:const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TextField(
-              controller: _titleController,
-              decoration: const InputDecoration(
-                border: InputBorder.none,
-                hintText: 'Note Title'
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TextField(
+                controller: _titleController,
+                style: AppStyle.mainTitle,
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: 'Note Title',
+                ),
               ),
-              style: AppStyle.mainTitle,
-            ),
-           const SizedBox(height: 8.0,),
-            Text(date, style: AppStyle.dateTitle,),
-            const SizedBox(height: 28.0,),
-
-            TextField(
-              controller: _mainController,
-              keyboardType: TextInputType.multiline,
-              maxLines: null,
-              decoration: const InputDecoration(
-                border: InputBorder.none,
-                hintText: 'Note content'
+              const SizedBox(height: 4.0),
+              Text(
+                widget.doc["creation_date"],
+                style: AppStyle.dateTitle,
               ),
-              style: AppStyle.mainContent,
-              
-            )
-          ],
+              const SizedBox(height: 28.0),
+              TextField(
+                controller: _contentController,
+                style: AppStyle.mainContent,
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: 'Note Content',
+                ),
+                maxLines: null,
+              ),
+            ],
+          ),
         ),
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        backgroundColor: AppStyle.accentColor,
-        onPressed: () async{
-          FirebaseFirestore.instance.collection("Notes").add({
-            "note_title": _titleController.text,
-            "creation_date": date,
-            "note_content": _mainController.text,
-            "color_id": color_id
-            }).then((value){
-              print(value.id);
-              Navigator.pop(context);
-              }).catchError(
-                (error)=> print("Failed to add a new NOte"));
-                },
-         label:const Text(""),
-          icon: const Icon(Icons.save)),
     );
   }
 }

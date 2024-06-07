@@ -60,10 +60,10 @@ void dispose(){
                 fontSize: 50
               ),
             ),
-            SizedBox(height: 20,),
+            SizedBox(height: 15,),
             Text("Welcome again, We've missed you :( ",
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
-            SizedBox(height: 20,),
+            SizedBox(height: 50,),
             
             //email column
           
@@ -108,7 +108,7 @@ void dispose(){
                 ),
               ),
             ),
-            SizedBox(height: 10,),
+            SizedBox(height: 20,),
 
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -130,7 +130,7 @@ void dispose(){
                   ),
               ),
               ),
-              SizedBox(height: 10,),
+              SizedBox(height: 20,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

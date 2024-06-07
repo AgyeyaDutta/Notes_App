@@ -6,11 +6,8 @@ import 'dart:async';
 import 'package:firebasenotes/pages/loginpage.dart';
 import 'package:firebasenotes/services/singup_services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-
 import 'package:google_fonts/google_fonts.dart';
 
 class SignupPage extends StatefulWidget {
@@ -134,21 +131,6 @@ Future signUp() async{
                  ),
                ),
                 const SizedBox(height: 20,),
-          
-               //adding button
-            //  ElevatedButton(
-            //   onPressed:() async{
-            //     // ignore: unused_local_variable
-            //     var userName = userNameController.text.trim();
-            //     var userEmail = userEmailController.text.trim();
-            //     var userPassword = userPasswordController.text.trim();
-          
-            //     FirebaseAuth.instance.createUserWithEmailAndPassword(
-            //       email: userEmail , password: userPassword).then((value)=>{
-            //         signUpUser(userName, userEmail, userPassword,)
-            //       });
-            //   }, child: const Text('Sign Up')),
-            //    const SizedBox(height: 25,),
 
              Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -170,6 +152,7 @@ Future signUp() async{
                   ),
               ),
               ),
+              SizedBox(height: 20,),
           
               //new member
                Row(
