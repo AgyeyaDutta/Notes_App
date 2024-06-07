@@ -80,9 +80,6 @@ class _NoteEditoreScreenState extends State<NoteEditoreScreen> {
             "note_content": _mainController.text,
             "color_id": color_id,
             "userId": userId?.uid,
-            // }).then((value){
-            //   print(value.id);
-            //   Navigator.pop(context);
               }).catchError(
                 // ignore: avoid_print
                 (error)=> print("Failed to add a new NOte"));

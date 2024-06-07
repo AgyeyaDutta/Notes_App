@@ -36,10 +36,10 @@ class _NoteEditorScreenState extends State<NoteEditorScreen> {
       'note_content': _contentController.text,
     });
 
-    // Optionally, show a success message
+  
     Get.snackbar('Success', 'Note updated successfully', snackPosition: SnackPosition.BOTTOM);
 
-    // Navigate back to the HomeScreen
+  
     Get.offAll(() => HomeScreen());
   }
 
@@ -96,7 +96,7 @@ class _NoteEditorScreenState extends State<NoteEditorScreen> {
               ),
             ],
           ),
-        ),
+        )
       ),
     );
   }

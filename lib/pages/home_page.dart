@@ -9,7 +9,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:firebasenotes/widgets/note_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -132,7 +131,6 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           Get.to(()=> NoteEditoreScreen());
-          //Navigator.push(context, MaterialPageRoute(builder: (context)=> const NoteEditoreScreen()));
         },
         label:const Text("Add Notes"),
         icon: const Icon(Icons.add)),
