@@ -24,6 +24,20 @@ Future redirect() async{
 }
 
 Future signUp() async{
+  showDialog(context: context, builder: (context){
+    return AlertDialog(
+      title: Text("Welcome aboard"),
+      content: Text('Please make sure you used the correct format for your email'),
+      actions: [
+        TextButton(onPressed: (){
+        Navigator.of(context).pop();
+        },
+         child: Text('ok'))
+      ],
+    );
+    
+  },
+  );
    var userName = userNameController.text.trim();
    var userEmail = userEmailController.text.trim();
    var userPassword = userPasswordController.text.trim();

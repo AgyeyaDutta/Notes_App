@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, use_build_context_synchronously
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebasenotes/pages/home_page.dart';
@@ -25,12 +25,45 @@ final _emailcontroller = TextEditingController();
 final _passwordcontroller = TextEditingController();
 
 Future signIn() async{
-  
+  showDialog(context: context, builder: (context){
+    return Center(child: CircularProgressIndicator());
+  },
+  );
+  try{
   await FirebaseAuth.instance.signInWithEmailAndPassword(
     email: _emailcontroller.text.trim(), 
     password: _passwordcontroller.text.trim() );
+    Navigator.of(context).pop();
     Get.to(()=>HomeScreen());
-}
+} on FirebaseAuthException {
+     Navigator.of(context).pop(); // Close the loading dialog
+      _showErrorDialog();
+    }
+  }
+    // Show error dialog
+  void _showErrorDialog() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text("Login Failed"),
+          content: Text(' Wrong Email id or Password '),
+          actions: [
+            TextButton(
+              onPressed: () {
+               Navigator.of(context).pop();
+              },
+              child: Text("OK"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+
+
+
 @override
 void dispose(){
   _emailcontroller.dispose();
