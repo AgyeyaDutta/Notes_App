@@ -52,11 +52,19 @@ Future signUp() async{
   TextEditingController userPasswordController = TextEditingController();
   
   User? currentUser = FirebaseAuth.instance.currentUser;
-
+ Future<bool> _onWillPop() async {
+    // Prevent navigating back
+    return false;
+  }
 
 @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return  
+    WillPopScope(
+      onWillPop: _onWillPop,
+      child:
+    
+    Scaffold(
       backgroundColor: const Color.fromARGB(255, 237, 233, 233),
       body:  SafeArea(
         child: Center(
@@ -197,7 +205,7 @@ Future signUp() async{
           ),
         ),
       )
-    );
+    ));
   }
 }
 
