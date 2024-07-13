@@ -9,14 +9,14 @@ import 'package:flutter/material.dart';
 import 'package:firebasenotes/style/app_style.dart';
 import 'package:get/get.dart';
 
-class NoteEditoreScreen extends StatefulWidget {
-  const NoteEditoreScreen({super.key});
+class NoteCreateScreen extends StatefulWidget {
+  const NoteCreateScreen({super.key});
 
   @override
-  State<NoteEditoreScreen> createState() => _NoteEditoreScreenState();
+  State<NoteCreateScreen> createState() => _NoteEditoreScreenState();
 }
 
-class _NoteEditoreScreenState extends State<NoteEditoreScreen> {
+class _NoteEditoreScreenState extends State<NoteCreateScreen> {
   // ignore: non_constant_identifier_names
   int color_id = Random().nextInt(AppStyle.cardsColor.length);
 

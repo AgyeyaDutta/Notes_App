@@ -130,7 +130,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          Get.to(()=> NoteEditoreScreen());
+          Get.to(()=> NoteCreateScreen());
         },
         label:const Text("Add Notes"),
         icon: const Icon(Icons.add)),
