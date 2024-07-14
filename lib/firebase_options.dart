@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 /// Default [FirebaseOptions] for use with your Firebase apps.
 ///
@@ -38,8 +39,8 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBqDUhtEwKa9uMiijLIgVevRLjr1_3AY1w',
+  static FirebaseOptions ios = FirebaseOptions(
+    apiKey: '${dotenv.env["APIKEYIOS"]}',
     appId: '1:955298170402:ios:d3b6cf17af00336739ec7b',
     messagingSenderId: '955298170402',
     projectId: 'fir-notes-c5497',
@@ -47,8 +48,8 @@ class DefaultFirebaseOptions {
     iosBundleId: 'com.example.firebasenotes',
   );
 
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyBqDUhtEwKa9uMiijLIgVevRLjr1_3AY1w',
+  static  FirebaseOptions macos = FirebaseOptions(
+    apiKey: '${dotenv.env["APIKEYIOS"]}',
     appId: '1:955298170402:ios:d3b6cf17af00336739ec7b',
     messagingSenderId: '955298170402',
     projectId: 'fir-notes-c5497',
@@ -56,8 +57,8 @@ class DefaultFirebaseOptions {
     iosBundleId: 'com.example.firebasenotes',
   );
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDJ45YghCTZxzbcvrhTWXJuE9fc9ITTm_M',
+  static  FirebaseOptions web = FirebaseOptions(
+    apiKey: '${dotenv.env["APIKEYWEB"]}',
     appId: '1:955298170402:web:834cf9239348295939ec7b',
     messagingSenderId: '955298170402',
     projectId: 'fir-notes-c5497',
@@ -66,16 +67,16 @@ class DefaultFirebaseOptions {
     measurementId: 'G-97TNBSR1GL',
   );
 
-  static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBCNITuVeR8kvZniduNxFijQvMoOhcvnzg',
+  static  FirebaseOptions android = FirebaseOptions(
+    apiKey: '${dotenv.env["APIKEYAND"]}',
     appId: '1:955298170402:android:196d532bfb80e7f739ec7b',
     messagingSenderId: '955298170402',
     projectId: 'fir-notes-c5497',
     storageBucket: 'fir-notes-c5497.appspot.com',
   );
 
-  static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyDJ45YghCTZxzbcvrhTWXJuE9fc9ITTm_M',
+  static FirebaseOptions windows = FirebaseOptions(
+    apiKey: '${dotenv.env["APIKEYWEB"]}',
     appId: '1:955298170402:web:ae013af665683fbd39ec7b',
     messagingSenderId: '955298170402',
     projectId: 'fir-notes-c5497',
