@@ -37,7 +37,7 @@ class _NoteEditorScreenState extends State<NoteEditorScreen> {
     });
 
   
-    Get.snackbar('Success', 'Note updated successfully', snackPosition: SnackPosition.BOTTOM);
+    Get.snackbar('Success', 'Note has been updated successfully', snackPosition: SnackPosition.BOTTOM);
 
   
     Get.offAll(() => HomeScreen());
